@@ -18,8 +18,7 @@ public class OtpController {
     @Autowired
     private ISignupService signupService;
 
-    @PostMapping(value = "/otp/generate", consumes = {APPLICATION_JSON_VALUE}, produces = {
-            APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/otp/generate", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity generateOtp(OtpRequestDto otpRequestDto) {
         String otp = signupService.generateOtp();
 

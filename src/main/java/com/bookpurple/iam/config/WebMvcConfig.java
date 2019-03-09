@@ -15,8 +15,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private ClientAuthInterceptor clientAuthInterceptor;
 
+    private String[] pattern = {"/iam/**"};
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(clientAuthInterceptor).addPathPatterns("/iam/**");
+        registry.addInterceptor(clientAuthInterceptor).addPathPatterns(pattern);
     }
 }
