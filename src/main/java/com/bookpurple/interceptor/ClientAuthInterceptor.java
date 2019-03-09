@@ -2,6 +2,7 @@ package com.bookpurple.interceptor;
 
 import com.bookpurple.iam.constant.Constants;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /*
  * Created by gauravsharma on 2019-03-09.
  */
+@Component
 public class ClientAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Value("${basic.auth.token}")
