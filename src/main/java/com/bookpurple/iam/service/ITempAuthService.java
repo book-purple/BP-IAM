@@ -1,4 +1,4 @@
-package com.bookpurple.iam.service.impl;
+package com.bookpurple.iam.service;
 
 import com.bookpurple.iam.bo.AuthRequestBo;
 import com.bookpurple.iam.bo.TempAuthBo;

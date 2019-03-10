@@ -1,7 +1,6 @@
 package com.bookpurple.iam.controller;
 
 import com.bookpurple.iam.bo.AuthRequestBo;
-import com.bookpurple.iam.converter.AuthRequestMapper;
 import com.bookpurple.iam.dto.AuthRequestDto;
 import com.bookpurple.iam.service.ISignupService;
 import org.springframework.beans.factory.annotation.Autowired;

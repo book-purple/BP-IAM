@@ -1,18 +1,15 @@
-package com.bookpurple.iam.service;
+package com.bookpurple.iam.service.impl;
 
 import com.bookpurple.iam.bo.AuthRequestBo;
 import com.bookpurple.iam.bo.TempAuthBo;
 import com.bookpurple.iam.constant.Constants;
-import com.bookpurple.iam.converter.TempAuthRequestMapper;
+import com.bookpurple.iam.converter.IRequestMapper;
 import com.bookpurple.iam.entity.TempAuthEntity;
 import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
 import com.bookpurple.iam.repo.repo.TempAuthSlaveRepo;
-import com.bookpurple.iam.service.impl.ITempAuthService;
+import com.bookpurple.iam.service.ITempAuthService;
 import com.bookpurple.iam.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.time.Instant;
-import java.util.Date;
 
 /*
  * Created by gauravsharma on 2019-03-10.
@@ -26,7 +23,7 @@ public class TempAuthServiceImpl implements ITempAuthService {
     private TempAuthSlaveRepo tempAuthSlaveRepo;
 
     @Autowired
-    private TempAuthRequestMapper tempAuthRequestMapper;
+    private IRequestMapper iRequestMapper;
 
     @Override
     public TempAuthBo createTempAuth(AuthRequestBo authRequestBo) {
@@ -45,7 +42,7 @@ public class TempAuthServiceImpl implements ITempAuthService {
     }
 
     private void saveTempAuth(TempAuthBo tempAuthBo) {
-        tempAuthMasterRepo.save(tempAuthRequestMapper.BoToEntity(tempAuthBo));
+        tempAuthMasterRepo.save(iRequestMapper.tempAuthBoToEntity(tempAuthBo));
     }
 
     @Override
@@ -56,12 +53,12 @@ public class TempAuthServiceImpl implements ITempAuthService {
                         authRequestBo.getCountryCode(),
                         status)
                 .orElse(null);
-        return tempAuthRequestMapper.entityToBo(tempAuthEntity);
+        return iRequestMapper.tempAuthEntityToBo(tempAuthEntity);
     }
 
     @Override
     public void updateTempAuth(TempAuthBo tempAuthBo) {
-        tempAuthMasterRepo.save(tempAuthRequestMapper.BoToEntity(tempAuthBo));
+        tempAuthMasterRepo.save(iRequestMapper.tempAuthBoToEntity(tempAuthBo));
     }
 
     @Override
