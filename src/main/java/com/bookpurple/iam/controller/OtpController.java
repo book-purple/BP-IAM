@@ -1,6 +1,8 @@
 package com.bookpurple.iam.controller;
 
-import com.bookpurple.iam.dto.OtpRequestDto;
+import com.bookpurple.iam.bo.AuthRequestBo;
+import com.bookpurple.iam.converter.AuthRequestMapper;
+import com.bookpurple.iam.dto.AuthRequestDto;
 import com.bookpurple.iam.service.ISignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +20,13 @@ public class OtpController {
     @Autowired
     private ISignupService signupService;
 
+    @Autowired
+    private AuthRequestMapper authRequestMapper;
+
     @PostMapping(value = "/otp/generate", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
-    public ResponseEntity generateOtp(OtpRequestDto otpRequestDto) {
-        String otp = signupService.generateOtp();
+    public ResponseEntity generateOtp(AuthRequestDto authRequestDto) {
+        AuthRequestBo authRequestBo = authRequestMapper.authRequestDtoToBo(authRequestDto);
+        signupService.generateOtp(authRequestBo);
 
         return new ResponseEntity(HttpStatus.OK);
     }
