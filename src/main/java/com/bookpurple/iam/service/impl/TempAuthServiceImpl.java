@@ -10,10 +10,12 @@ import com.bookpurple.iam.repo.slave.TempAuthSlaveRepo;
 import com.bookpurple.iam.service.ITempAuthService;
 import com.bookpurple.iam.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /*
  * Created by gauravsharma on 2019-03-10.
  */
+@Service
 public class TempAuthServiceImpl implements ITempAuthService {
 
     @Autowired

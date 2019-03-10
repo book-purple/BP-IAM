@@ -14,8 +14,16 @@ public class Constants {
         public static final int OTP_EXPIRY_OFFSET = 2;
         public static final int OTP_LENGTH = 6;
         public static final int OTP_RESEND_LIMIT = 3;
+
         public static final int TEMP_AUTH_ACTIVE = 1;
         public static final int TEMP_AUTH_INACTIVE = 0;
+
         public static final int USER_ID_LENGTH = 20;
+
+        public static final int STATUS_ACTIVE = 1;
+        public static final int STATUS_INACTIVE = 0;
+
+        public static final int AUTH_TOKEN_ACTIVE = 1;
+        public static final int AUTH_TOKEN_INACTIVE = 0;
     }
 }

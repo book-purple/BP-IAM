@@ -26,11 +26,11 @@ public interface IRequestMapper {
 
     UserEntity userBoToEntity(UserBo userBo);
 
-    UserDeviceBo userDeviceBoToEntity(UserDeviceEntity userDeviceEntity);
+    UserDeviceEntity userDeviceBoToEntity(UserDeviceBo userDeviceBo);
 
-    UserDeviceEntity userDeviceEntityToBo(UserDeviceBo userDeviceBo);
+    UserDeviceBo userDeviceEntityToBo(UserDeviceEntity userDeviceEntity);
 
-    UserAccessCodeBo userDevicAccessCodeBoToEntity(UserAccessCodeEntity userAccessCodeEntity);
+    UserAccessCodeBo userAccessCodeEntityToBo(UserAccessCodeEntity userAccessCodeEntity);
 
-    UserAccessCodeEntity userAccessCodeEntityToBo(UserAccessCodeBo userAccessCodeBo);
+    UserAccessCodeEntity userAccessCodeBoToEntity(UserAccessCodeBo userAccessCodeBo);
 }

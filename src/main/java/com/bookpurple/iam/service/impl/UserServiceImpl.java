@@ -11,10 +11,14 @@ import com.bookpurple.iam.service.IUserService;
 import com.bookpurple.iam.util.CommonUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 /*
  * Created by gauravsharma on 2019-03-10.
  */
+@Service
 public class UserServiceImpl implements IUserService {
 
     @Autowired
@@ -27,6 +31,7 @@ public class UserServiceImpl implements IUserService {
     private IRequestMapper requestMapper;
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public UserBo createUser(AuthRequestBo authRequestBo) {
         UserBo userBo = UserBo.builder()
                 .userUId(generateUserUid())

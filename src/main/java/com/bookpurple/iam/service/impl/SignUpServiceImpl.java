@@ -1,12 +1,17 @@
 package com.bookpurple.iam.service.impl;
 
 import com.bookpurple.iam.bo.AuthRequestBo;
+import com.bookpurple.iam.bo.UserAccessCodeBo;
+import com.bookpurple.iam.bo.UserBo;
+import com.bookpurple.iam.bo.UserDeviceBo;
+import com.bookpurple.iam.constant.Constants;
 import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
 import com.bookpurple.iam.repo.slave.TempAuthSlaveRepo;
-import com.bookpurple.iam.service.ISignupService;
-import com.bookpurple.iam.service.IUserService;
+import com.bookpurple.iam.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /*
  * Created by gauravsharma on 2019-02-24.
@@ -23,12 +28,49 @@ public class SignUpServiceImpl implements ISignupService {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private ITempAuthService tempAuthService;
+
+    @Autowired
+    private IUserDeviceService userDeviceService;
+
+    @Autowired
+    private IUserAccessCodeService userAccessCodeService;
+
     @Override
     public void generateOtp(AuthRequestBo authRequestBo) {
         // todo handling for block user
         invalidateUserAuthToken(authRequestBo);
+        deleteTempAuth(authRequestBo);
     }
 
     private void invalidateUserAuthToken(AuthRequestBo authRequestBo) {
+        UserBo userBo = userService.findUser(authRequestBo,
+                Constants.AuthConstants.STATUS_ACTIVE);
+        if (null != userBo) {
+            UserDeviceBo userDeviceBo = userDeviceService
+                    .findUserDevice(userBo.getUserUId(),
+                            userBo.getDeviceId());
+            if (null != userDeviceBo) {
+                UserAccessCodeBo userAccessCodeBo = userAccessCodeService
+                        .findUserAccessCode(userDeviceBo.getUserUId(),
+                                userDeviceBo.getDeviceId(),
+                                Constants.AuthConstants.AUTH_TOKEN_ACTIVE);
+                if (null != userAccessCodeBo) {
+                    userAccessCodeService.invalidateUserAuthToken(userAccessCodeBo);
+                } else {
+                    // todo add log here
+                }
+            } else {
+                // todo add log here
+            }
+        } else {
+            // todo: add log here
+        }
+    }
+
+    private void deleteTempAuth(AuthRequestBo authRequestBo) {
+        Optional.ofNullable(tempAuthService.findTempAuth(authRequestBo, Constants.AuthConstants.TEMP_AUTH_ACTIVE))
+                .ifPresent(tempAuthBo -> tempAuthService.deleteTempAuth(tempAuthBo.getId()));
     }
 }
