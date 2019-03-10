@@ -22,9 +22,9 @@ public interface IRequestMapper {
 
     TempAuthEntity tempAuthBoToEntity(TempAuthBo tempAuthBo);
 
-    UserBo userBoToEntity(UserEntity userEntity);
+    UserBo userEntityToBo(UserEntity userEntity);
 
-    UserEntity userEntityToBo(UserBo userBo);
+    UserEntity userBoToEntity(UserBo userBo);
 
     UserDeviceBo userDeviceBoToEntity(UserDeviceEntity userDeviceEntity);
 

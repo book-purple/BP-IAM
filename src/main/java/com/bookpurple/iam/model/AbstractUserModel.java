@@ -26,14 +26,20 @@ public abstract class AbstractUserModel {
     @NotNull
     @NotBlank
     @NotEmpty
+    @Column(name = "mobile")
+    private String mobile;
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
     @Column(name = "device_id")
     private String deviceId;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "country_code")
+    private String countryCode;
 
     @NotNull
     @NotBlank

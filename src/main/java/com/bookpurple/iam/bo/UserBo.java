@@ -17,14 +17,15 @@ public class UserBo extends AbstractUserModel {
 
     @Builder
     public UserBo(Long id,
+                  @NotNull @NotBlank @NotEmpty String mobile,
                   @NotNull @NotBlank @NotEmpty String deviceId,
-                  @NotNull @NotBlank @NotEmpty Integer userId,
+                  @NotNull @NotBlank @NotEmpty String countryCode,
                   @NotNull @NotBlank @NotEmpty String userUId,
                   String firstName,
                   String lastName,
                   Date createdAt,
                   Date modifiedAt,
                   int status) {
-        super(id, deviceId, userId, userUId, firstName, lastName, createdAt, modifiedAt, status);
+        super(id, mobile, deviceId, countryCode, userUId, firstName, lastName, createdAt, modifiedAt, status);
     }
 }
