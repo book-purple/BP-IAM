@@ -17,7 +17,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AbstractUserDeviceModel {
+public abstract class AbstractUserDeviceModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

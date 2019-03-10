@@ -7,5 +7,5 @@ import com.bookpurple.iam.bo.AuthRequestBo;
  */
 public interface ISignupService {
 
-    public String generateOtp(AuthRequestBo authRequestBo);
+    public void generateOtp(AuthRequestBo authRequestBo);
 }

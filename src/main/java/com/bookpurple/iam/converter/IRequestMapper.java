@@ -1,13 +1,11 @@
 package com.bookpurple.iam.converter;
 
-import com.bookpurple.iam.bo.AuthRequestBo;
-import com.bookpurple.iam.bo.TempAuthBo;
-import com.bookpurple.iam.bo.UserAccessCodeBo;
-import com.bookpurple.iam.bo.UserDeviceBo;
+import com.bookpurple.iam.bo.*;
 import com.bookpurple.iam.dto.AuthRequestDto;
 import com.bookpurple.iam.entity.TempAuthEntity;
 import com.bookpurple.iam.entity.UserAccessCodeEntity;
 import com.bookpurple.iam.entity.UserDeviceEntity;
+import com.bookpurple.iam.entity.UserEntity;
 import org.mapstruct.Mapper;
 
 /*
@@ -20,10 +18,13 @@ public interface IRequestMapper {
 
     AuthRequestDto authRequestBoToDto(AuthRequestBo authRequestBo);
 
-
     TempAuthBo tempAuthEntityToBo(TempAuthEntity tempAuthEntity);
 
     TempAuthEntity tempAuthBoToEntity(TempAuthBo tempAuthBo);
+
+    UserBo userBoToEntity(UserEntity userEntity);
+
+    UserEntity userEntityToBo(UserBo userBo);
 
     UserDeviceBo userDeviceBoToEntity(UserDeviceEntity userDeviceEntity);
 

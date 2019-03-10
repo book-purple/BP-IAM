@@ -17,7 +17,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class AbstractUserAccessCodeModel {
+public abstract class AbstractUserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +41,11 @@ public abstract class AbstractUserAccessCodeModel {
     @Column(name = "user_uid")
     private String userUId;
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
-    @Column(name = "auth_token")
-    private String authToken;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "created_at")
     private Date createdAt;

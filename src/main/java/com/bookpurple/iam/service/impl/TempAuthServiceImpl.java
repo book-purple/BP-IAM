@@ -6,7 +6,7 @@ import com.bookpurple.iam.constant.Constants;
 import com.bookpurple.iam.converter.IRequestMapper;
 import com.bookpurple.iam.entity.TempAuthEntity;
 import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
-import com.bookpurple.iam.repo.repo.TempAuthSlaveRepo;
+import com.bookpurple.iam.repo.slave.TempAuthSlaveRepo;
 import com.bookpurple.iam.service.ITempAuthService;
 import com.bookpurple.iam.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;

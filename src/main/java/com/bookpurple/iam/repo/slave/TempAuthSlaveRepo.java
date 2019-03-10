@@ -1,4 +1,4 @@
-package com.bookpurple.iam.repo.repo;
+package com.bookpurple.iam.repo.slave;
 
 import com.bookpurple.iam.entity.TempAuthEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
