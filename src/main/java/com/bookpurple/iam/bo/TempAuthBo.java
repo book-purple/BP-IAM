@@ -12,6 +12,7 @@ import java.util.Date;
  * Created by gauravsharma on 2019-03-10.
  */
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 @Data
 public class TempAuthBo extends AbstractTempAuthModel {
 

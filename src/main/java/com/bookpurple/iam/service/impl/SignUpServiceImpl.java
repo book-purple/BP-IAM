@@ -5,10 +5,12 @@ import com.bookpurple.iam.bo.UserAccessCodeBo;
 import com.bookpurple.iam.bo.UserBo;
 import com.bookpurple.iam.bo.UserDeviceBo;
 import com.bookpurple.iam.constant.Constants;
+import com.bookpurple.iam.enums.ProfilesEnum;
 import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
 import com.bookpurple.iam.repo.slave.TempAuthSlaveRepo;
 import com.bookpurple.iam.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,6 +20,9 @@ import java.util.Optional;
  */
 @Service
 public class SignUpServiceImpl implements ISignupService {
+
+    @Autowired
+    private Environment environment;
 
     @Autowired
     private TempAuthMasterRepo tempAuthMasterRepo;
@@ -42,6 +47,8 @@ public class SignUpServiceImpl implements ISignupService {
         // todo handling for block user
         invalidateUserAuthToken(authRequestBo);
         deleteTempAuth(authRequestBo);
+        String otp = getOtp();
+        // send this otp to UCF layer
     }
 
     private void invalidateUserAuthToken(AuthRequestBo authRequestBo) {
@@ -72,5 +79,11 @@ public class SignUpServiceImpl implements ISignupService {
     private void deleteTempAuth(AuthRequestBo authRequestBo) {
         Optional.ofNullable(tempAuthService.findTempAuth(authRequestBo, Constants.AuthConstants.TEMP_AUTH_ACTIVE))
                 .ifPresent(tempAuthBo -> tempAuthService.deleteTempAuth(tempAuthBo.getId()));
+    }
+
+    private String getOtp() {
+        return String
+                .valueOf(ProfilesEnum.getProfilesByEnv(environment.getActiveProfiles()[0])
+                        .getGeneratedOtp());
     }
 }

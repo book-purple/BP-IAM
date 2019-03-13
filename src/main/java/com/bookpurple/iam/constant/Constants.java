@@ -25,5 +25,6 @@ public class Constants {
 
         public static final int AUTH_TOKEN_ACTIVE = 1;
         public static final int AUTH_TOKEN_INACTIVE = 0;
+        public static final int OTP_DEV = 123456;
     }
 }

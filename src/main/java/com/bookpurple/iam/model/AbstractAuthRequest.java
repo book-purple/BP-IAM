@@ -1,6 +1,7 @@
 package com.bookpurple.iam.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.persistence.MappedSuperclass;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 @Data
+@NoArgsConstructor
 public abstract class AbstractAuthRequest {
 
     @NotNull

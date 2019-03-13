@@ -3,6 +3,7 @@ package com.bookpurple.iam.bo;
 import com.bookpurple.iam.model.AbstractUserModel;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -13,6 +14,7 @@ import java.util.Date;
  * Created by gauravsharma on 2019-03-10.
  */
 @Data
+@NoArgsConstructor
 public class UserBo extends AbstractUserModel {
 
     @Builder

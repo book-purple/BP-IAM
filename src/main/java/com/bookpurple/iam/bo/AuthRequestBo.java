@@ -2,6 +2,7 @@ package com.bookpurple.iam.bo;
 
 import com.bookpurple.iam.model.AbstractAuthRequest;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
@@ -10,6 +11,7 @@ import lombok.ToString;
  */
 @Builder
 @ToString
+@NoArgsConstructor
 public class AuthRequestBo extends AbstractAuthRequest {
 
 }
