@@ -15,7 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/iam")
-public class OtpController {
+public class AuthController {
 
     @Autowired
     private ISignupService signupService;
@@ -28,6 +28,11 @@ public class OtpController {
         AuthRequestBo authRequestBo = requestMapper.authRequestDtoToBo(authRequestDto);
         signupService.generateOtp(authRequestBo);
 
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/signup", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
+    public ResponseEntity signUpUser() {
         return new ResponseEntity(HttpStatus.OK);
     }
 }
