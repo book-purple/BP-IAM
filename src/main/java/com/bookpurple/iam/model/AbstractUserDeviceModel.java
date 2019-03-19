@@ -33,7 +33,7 @@ public abstract class AbstractUserDeviceModel {
     @NotBlank
     @NotEmpty
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 
     @NotNull
     @NotBlank
@@ -48,7 +48,7 @@ public abstract class AbstractUserDeviceModel {
     private String appVersion;
 
     @Column(name = "app_version_code")
-    private int appVersionCode;
+    private String appVersionCode;
 
     @Column(name = "device_type")
     private String deviceType;

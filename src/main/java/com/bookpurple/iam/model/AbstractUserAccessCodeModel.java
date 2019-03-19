@@ -33,7 +33,7 @@ public abstract class AbstractUserAccessCodeModel {
     @NotBlank
     @NotEmpty
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 
     @NotNull
     @NotBlank

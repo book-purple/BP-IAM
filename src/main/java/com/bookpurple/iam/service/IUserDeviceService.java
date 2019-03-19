@@ -1,5 +1,7 @@
 package com.bookpurple.iam.service;
 
+import com.bookpurple.iam.bo.SignUpRequestBo;
+import com.bookpurple.iam.bo.UserBo;
 import com.bookpurple.iam.bo.UserDeviceBo;
 
 /*
@@ -8,4 +10,8 @@ import com.bookpurple.iam.bo.UserDeviceBo;
 public interface IUserDeviceService {
 
     UserDeviceBo findUserDevice(String userUid, String deviceId);
+
+    UserDeviceBo createUserDevice(UserBo userBo, SignUpRequestBo signUpRequestBo);
+
+    void updateUserDevice(UserDeviceBo userDeviceBo);
 }

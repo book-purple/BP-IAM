@@ -32,7 +32,9 @@ public class AuthController {
     }
 
     @PostMapping(value = "/signup", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
-    public ResponseEntity signUpUser() {
+    public ResponseEntity signUpUser(AuthRequestDto authRequestDto) {
+        AuthRequestBo authRequestBo = requestMapper.authRequestDtoToBo(authRequestDto);
+
         return new ResponseEntity(HttpStatus.OK);
     }
 }

@@ -22,11 +22,11 @@ public class UserDeviceBo extends AbstractUserDeviceModel {
     @Builder
     public UserDeviceBo(Long id,
                         @NotNull @NotBlank @NotEmpty String deviceId,
-                        @NotNull @NotBlank @NotEmpty Integer userId,
+                        @NotNull @NotBlank @NotEmpty Long userId,
                         @NotNull @NotBlank @NotEmpty String userUId,
                         String mobileVersion,
                         String appVersion,
-                        int appVersionCode,
+                        String appVersionCode,
                         String deviceType,
                         String osVersion,
                         Date createdAt,

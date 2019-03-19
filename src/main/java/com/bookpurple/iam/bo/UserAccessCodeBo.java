@@ -21,7 +21,7 @@ public class UserAccessCodeBo extends AbstractUserAccessCodeModel {
 
     @Builder
     public UserAccessCodeBo(Long id,
-                            @NotNull @NotBlank @NotEmpty String deviceId, @NotNull @NotBlank @NotEmpty Integer userId,
+                            @NotNull @NotBlank @NotEmpty String deviceId, @NotNull @NotBlank @NotEmpty Long userId,
                             @NotNull @NotBlank @NotEmpty String userUId,
                             @NotNull @NotBlank @NotEmpty String authToken,
                             Date createdAt,

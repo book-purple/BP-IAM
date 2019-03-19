@@ -1,9 +1,7 @@
 package com.bookpurple.iam.service.impl;
 
-import com.bookpurple.iam.bo.AuthRequestBo;
-import com.bookpurple.iam.bo.UserAccessCodeBo;
-import com.bookpurple.iam.bo.UserBo;
-import com.bookpurple.iam.bo.UserDeviceBo;
+import com.bookpurple.iam.Processor.ISignUpProcessor;
+import com.bookpurple.iam.bo.*;
 import com.bookpurple.iam.constant.Constants;
 import com.bookpurple.iam.enums.ProfilesEnum;
 import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
@@ -41,6 +39,9 @@ public class SignUpServiceImpl implements ISignupService {
 
     @Autowired
     private IUserAccessCodeService userAccessCodeService;
+
+    @Autowired
+    private ISignUpProcessor signUpProcessor;
 
     @Override
     public void generateOtp(AuthRequestBo authRequestBo) {
@@ -86,4 +87,29 @@ public class SignUpServiceImpl implements ISignupService {
                 .valueOf(ProfilesEnum.getProfilesByEnv(environment.getActiveProfiles()[0])
                         .getGeneratedOtp());
     }
+
+    @Override
+    public SignUpResponseBo doUserSignUp(AuthRequestBo authRequestBo, SignUpRequestBo signUpRequestBo) {
+        SignUpResponseBo signUpResponseBo = null;
+        if (null == authRequestBo.getOtp()) {
+            return null;
+        }
+        String otp = authRequestBo.getOtp();
+        String mobile = authRequestBo.getMobile();
+        String deviceId = authRequestBo.getDeviceId();
+        String countryCode = authRequestBo.getCountryCode();
+
+        TempAuthBo tempAuthBo = tempAuthService.findTempAuth(authRequestBo, Constants.AuthConstants.AUTH_TOKEN_ACTIVE);
+        if (null == tempAuthBo) {
+            // sign up API got hit with /opt API
+            return null;
+        }
+        if (otp.equalsIgnoreCase(tempAuthBo.getOtp())) {
+            // otp matched... start sign-up service
+            signUpResponseBo = signUpProcessor.initiateSignUpProcessor(authRequestBo, signUpRequestBo);
+        }
+        return null;
+    }
+
+
 }
