@@ -68,14 +68,10 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
         SignUpResponseBo signUpResponseBo = null;
         UserDeviceBo userDeviceBo = userDeviceService.findUserDevice(userBo.getUserUId(),
                 userBo.getDeviceId());
-        if (Optional.ofNullable(userDeviceBo).isPresent()) {
-            UserAccessCodeBo userAccessCodeBo = userAccessCodeService.findUserAccessCode(userDeviceBo.getUserUId(),
-                    userDeviceBo.getDeviceId(), Constants.AuthConstants.AUTH_TOKEN_ACTIVE);
-            if (Optional.ofNullable(userAccessCodeBo).isPresent()) {
-                userAccessCodeService.invalidateUserAuthToken(userAccessCodeBo);
-            }
-        } else {
-            userDeviceBo = userDeviceService.createUserDevice(userBo)
+        UserAccessCodeBo userAccessCodeBo = userAccessCodeService.findUserAccessCode(userDeviceBo.getUserUId(),
+                userDeviceBo.getDeviceId(), Constants.AuthConstants.AUTH_TOKEN_ACTIVE);
+        if (Optional.ofNullable(userAccessCodeBo).isPresent()) {
+            userAccessCodeService.invalidateUserAuthToken(userAccessCodeBo);
         }
         return signUpResponseBo;
     }
