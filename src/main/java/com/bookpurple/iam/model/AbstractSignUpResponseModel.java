@@ -1,6 +1,5 @@
-package com.bookpurple.iam.bo;
+package com.bookpurple.iam.model;
 
-import com.bookpurple.iam.model.AbstractErrorModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +12,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignUpResponseBo {
+public abstract class AbstractSignUpResponseModel {
 
     @JsonProperty("authToken")
     private String authToken;

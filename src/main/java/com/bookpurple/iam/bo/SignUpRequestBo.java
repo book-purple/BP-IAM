@@ -1,27 +1,20 @@
 package com.bookpurple.iam.bo;
 
+import com.bookpurple.iam.model.AbstractSignUpRequest;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.codehaus.jackson.annotate.JsonProperty;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignUpRequestBo {
+public class SignUpRequestBo extends AbstractSignUpRequest {
 
-    @JsonProperty("deviceType")
-    private String deviceType;
-
-    @JsonProperty("appVersion")
-    private String appVersion;
-
-    @JsonProperty("appVersionCode")
-    private String appVersionCode;
-
-    @JsonProperty("osVersion")
-    private String osVersion;
-
-    @JsonProperty("deviceName")
-    private String deviceName;
+    @Builder
+    public SignUpRequestBo(String deviceType,
+                           String appVersion,
+                           String appVersionCode,
+                           String osVersion,
+                           String deviceName) {
+        super(deviceType, appVersion, appVersionCode, osVersion, deviceName);
+    }
 }

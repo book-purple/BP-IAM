@@ -27,4 +27,9 @@ public class Constants {
         public static final int AUTH_TOKEN_INACTIVE = 0;
         public static final int OTP_DEV = 123456;
     }
+
+    public static class Errors {
+        public static final String INCORRECT_OTP_ERROR = "Incorrect OTP";
+        public static final String INCORRECT_OTP_ERROR_MSG = "OTP entered is incorrect. Please try again!";
+    }
 }

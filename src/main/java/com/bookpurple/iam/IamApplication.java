@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({"com.bookpurple"})
 public class IamApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(IamApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(IamApplication.class, args);
+    }
 
 }

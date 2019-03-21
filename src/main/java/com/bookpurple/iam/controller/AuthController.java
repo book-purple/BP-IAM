@@ -1,8 +1,11 @@
 package com.bookpurple.iam.controller;
 
 import com.bookpurple.iam.bo.AuthRequestBo;
+import com.bookpurple.iam.bo.SignUpRequestBo;
 import com.bookpurple.iam.converter.IRequestMapper;
 import com.bookpurple.iam.dto.AuthRequestDto;
+import com.bookpurple.iam.dto.SignUpRequestDto;
+import com.bookpurple.iam.dto.SignUpResponseDto;
 import com.bookpurple.iam.service.ISignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,9 +35,13 @@ public class AuthController {
     }
 
     @PostMapping(value = "/signup", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
-    public ResponseEntity signUpUser(AuthRequestDto authRequestDto) {
+    public ResponseEntity<SignUpResponseDto> signUpUser(AuthRequestDto authRequestDto,
+                                                        SignUpRequestDto signUpRequestDto) {
         AuthRequestBo authRequestBo = requestMapper.authRequestDtoToBo(authRequestDto);
-
-        return new ResponseEntity(HttpStatus.OK);
+        SignUpRequestBo signUpRequestBo = requestMapper.signUpRequestDtoToBo(signUpRequestDto);
+        SignUpResponseDto signUpResponseDto = requestMapper
+                .signUpResponseBoToDto(signupService
+                        .doUserSignUp(authRequestBo, signUpRequestBo));
+        return new ResponseEntity<>(signUpResponseDto, HttpStatus.OK);
     }
 }

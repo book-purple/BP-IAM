@@ -4,6 +4,7 @@ import com.bookpurple.iam.Processor.ISignUpProcessor;
 import com.bookpurple.iam.bo.*;
 import com.bookpurple.iam.constant.Constants;
 import com.bookpurple.iam.enums.ProfilesEnum;
+import com.bookpurple.iam.model.AbstractErrorModel;
 import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
 import com.bookpurple.iam.repo.slave.TempAuthSlaveRepo;
 import com.bookpurple.iam.service.*;
@@ -95,9 +96,6 @@ public class SignUpServiceImpl implements ISignupService {
             return null;
         }
         String otp = authRequestBo.getOtp();
-        String mobile = authRequestBo.getMobile();
-        String deviceId = authRequestBo.getDeviceId();
-        String countryCode = authRequestBo.getCountryCode();
 
         TempAuthBo tempAuthBo = tempAuthService.findTempAuth(authRequestBo, Constants.AuthConstants.AUTH_TOKEN_ACTIVE);
         if (null == tempAuthBo) {
@@ -107,8 +105,23 @@ public class SignUpServiceImpl implements ISignupService {
         if (otp.equalsIgnoreCase(tempAuthBo.getOtp())) {
             // otp matched... start sign-up service
             signUpResponseBo = signUpProcessor.initiateSignUpProcessor(authRequestBo, signUpRequestBo);
+        } else {
+            signUpResponseBo = SignUpResponseBo.builder()
+                    .abstractErrorModel(new AbstractErrorModel() {
+
+                        @Override
+                        public void setError(String error) {
+                            super.setError(Constants.Errors.INCORRECT_OTP_ERROR);
+                        }
+
+                        @Override
+                        public void setErrorMessage(String errorMessage) {
+                            super.setErrorMessage(Constants.Errors.INCORRECT_OTP_ERROR_MSG);
+                        }
+                    })
+                    .build();
         }
-        return null;
+        return signUpResponseBo;
     }
 
 

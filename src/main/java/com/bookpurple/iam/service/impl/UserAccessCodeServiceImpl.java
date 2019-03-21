@@ -12,8 +12,6 @@ import com.bookpurple.iam.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 /*
  * Created by gauravsharma on 2019-03-10.
  */

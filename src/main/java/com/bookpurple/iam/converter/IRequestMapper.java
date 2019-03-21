@@ -2,6 +2,8 @@ package com.bookpurple.iam.converter;
 
 import com.bookpurple.iam.bo.*;
 import com.bookpurple.iam.dto.AuthRequestDto;
+import com.bookpurple.iam.dto.SignUpRequestDto;
+import com.bookpurple.iam.dto.SignUpResponseDto;
 import com.bookpurple.iam.entity.TempAuthEntity;
 import com.bookpurple.iam.entity.UserAccessCodeEntity;
 import com.bookpurple.iam.entity.UserDeviceEntity;
@@ -21,6 +23,10 @@ public interface IRequestMapper {
     TempAuthBo tempAuthEntityToBo(TempAuthEntity tempAuthEntity);
 
     TempAuthEntity tempAuthBoToEntity(TempAuthBo tempAuthBo);
+
+    SignUpRequestBo signUpRequestDtoToBo(SignUpRequestDto signUpRequestDto);
+
+    SignUpResponseDto signUpResponseBoToDto(SignUpResponseBo signUpResponseBo);
 
     UserBo userEntityToBo(UserEntity userEntity);
 

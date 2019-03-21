@@ -1,7 +1,7 @@
 package com.bookpurple.iam.Processor.impl;
 
-import com.bookpurple.iam.Processor.Processor;
 import com.bookpurple.iam.Processor.ISignUpProcessor;
+import com.bookpurple.iam.Processor.Processor;
 import com.bookpurple.iam.bo.*;
 import com.bookpurple.iam.constant.Constants;
 import com.bookpurple.iam.service.ITempAuthService;
@@ -35,6 +35,7 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
             // user does not exist... start sign up process
             return doSignUpProcess(authRequestBo, signUpRequestBo);
         }
+        // user found... start login process
         return doLoginProcess(userBo);
     }
 
@@ -57,13 +58,17 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
             // this should never happen
             return null;
         }
-        String authToken = generateAuthToken(authRequestBo);
-        return SignUpResponseBo.builder()
-                .authToken(authToken)
-                .build();
+        return initUserAuthProcess(userBo, userDeviceBo);
     }
 
     // --- Login Process ---
+
+    /**
+     * Login Process
+     *
+     * @param userBo {@link UserBo}
+     * @return Sign-up Response {@link SignUpResponseBo}
+     */
     private SignUpResponseBo doLoginProcess(UserBo userBo) {
         SignUpResponseBo signUpResponseBo = null;
         UserDeviceBo userDeviceBo = userDeviceService.findUserDevice(userBo.getUserUId(),
@@ -73,11 +78,32 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
         if (Optional.ofNullable(userAccessCodeBo).isPresent()) {
             userAccessCodeService.invalidateUserAuthToken(userAccessCodeBo);
         }
-        return signUpResponseBo;
+        return initUserAuthProcess(userBo, userDeviceBo);
     }
 
-    private String generateAuthToken(AuthRequestBo authRequestBo) {
-        String authToken = null;
+    /**
+     * Create User Access code and generate Auth Token
+     *
+     * @param userBo       {@link UserBo}
+     * @param userDeviceBo {@link UserDeviceBo}
+     * @return sign-up Response {@link SignUpResponseBo}
+     */
+    private SignUpResponseBo initUserAuthProcess(UserBo userBo, UserDeviceBo userDeviceBo) {
+        UserAccessCodeBo userAccessCodeBo = userAccessCodeService.createUserAccessCode(userDeviceBo,
+                generateAuthToken(userBo));
+        return SignUpResponseBo.builder()
+                .authToken(userAccessCodeBo.getAuthToken())
+                .build();
+    }
+
+    /**
+     * Function to generate Auth Token
+     *
+     * @param userBo {@link UserBo}
+     * @return
+     */
+    private String generateAuthToken(UserBo userBo) {
+        String authToken = "dummyAuthTokenForNow";
         // use JWT Token machanism for generating the payload
         return authToken;
     }

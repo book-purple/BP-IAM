@@ -11,5 +11,5 @@ public interface ISignupService {
 
     public void generateOtp(AuthRequestBo authRequestBo);
 
-    SignUpResponseBo doUserSignUp(AuthRequestBo authRequestBo,  SignUpRequestBo signUpRequestBo);
+    SignUpResponseBo doUserSignUp(AuthRequestBo authRequestBo, SignUpRequestBo signUpRequestBo);
 }

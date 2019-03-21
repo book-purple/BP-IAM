@@ -19,9 +19,10 @@ public class ClientAuthInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * This function intercept all open API requests
-     * @param request HttpServletRequest
+     *
+     * @param request  HttpServletRequest
      * @param response HttpServletResponse
-     * @param handler Object Handler
+     * @param handler  Object Handler
      * @return boolean true if authorization header value matches
      */
     @Override
