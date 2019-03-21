@@ -1,25 +1,26 @@
 package com.bookpurple.iam.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import javax.persistence.MappedSuperclass;
+
+/*
+ * Created by Gaurav Sharma on 21 Mar 2019
+ */
+@MappedSuperclass
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public abstract class AbstractSignUpResponseModel {
+@AllArgsConstructor
+public abstract class AbstractDeviceTokenRequestModel {
 
-    @JsonProperty("authToken")
-    private String authToken;
+    @JsonProperty("deviceToken")
+    private String deviceToken;
 
     @JsonProperty("userUid")
-    private String userUid;
-
-    @JsonProperty("error")
-    private AbstractErrorModel abstractErrorModel;
+    private String useruUid;
 }

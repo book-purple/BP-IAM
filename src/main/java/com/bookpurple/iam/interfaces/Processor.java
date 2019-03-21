@@ -1,4 +1,4 @@
-package com.bookpurple.iam.Processor;
+package com.bookpurple.iam.interfaces;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;

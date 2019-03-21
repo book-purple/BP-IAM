@@ -26,7 +26,8 @@ public class UserAccessCodeBo extends AbstractUserAccessCodeModel {
                             @NotNull @NotBlank @NotEmpty String authToken,
                             Date createdAt,
                             Date modifiedAt,
+                            Date expiredAt,
                             int status) {
-        super(id, deviceId, userId, userUId, authToken, createdAt, modifiedAt, status);
+        super(id, deviceId, userId, userUId, authToken, createdAt, modifiedAt,expiredAt, status);
     }
 }

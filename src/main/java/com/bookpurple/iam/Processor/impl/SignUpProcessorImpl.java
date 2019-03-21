@@ -1,7 +1,7 @@
 package com.bookpurple.iam.Processor.impl;
 
 import com.bookpurple.iam.Processor.ISignUpProcessor;
-import com.bookpurple.iam.Processor.Processor;
+import com.bookpurple.iam.interfaces.Processor;
 import com.bookpurple.iam.bo.*;
 import com.bookpurple.iam.constant.Constants;
 import com.bookpurple.iam.service.ITempAuthService;
@@ -93,6 +93,7 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
                 generateAuthToken(userBo));
         return SignUpResponseBo.builder()
                 .authToken(userAccessCodeBo.getAuthToken())
+                .userUid(userBo.getUserUId())
                 .build();
     }
 

@@ -1,9 +1,11 @@
 package com.bookpurple.iam.controller;
 
 import com.bookpurple.iam.bo.AuthRequestBo;
+import com.bookpurple.iam.bo.DeviceTokenRequestBo;
 import com.bookpurple.iam.bo.SignUpRequestBo;
 import com.bookpurple.iam.converter.IRequestMapper;
 import com.bookpurple.iam.dto.AuthRequestDto;
+import com.bookpurple.iam.dto.DeviceTokenRequestDto;
 import com.bookpurple.iam.dto.SignUpRequestDto;
 import com.bookpurple.iam.dto.SignUpResponseDto;
 import com.bookpurple.iam.service.ISignupService;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/iam")
+@RequestMapping("/iam/v1")
 public class AuthController {
 
     @Autowired
@@ -43,5 +45,11 @@ public class AuthController {
                 .signUpResponseBoToDto(signupService
                         .doUserSignUp(authRequestBo, signUpRequestBo));
         return new ResponseEntity<>(signUpResponseDto, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/device", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
+    public ResponseEntity saveUserDeviceToken(DeviceTokenRequestDto deviceTokenRequestDto) {
+        DeviceTokenRequestBo deviceTokenRequestBo = requestMapper.deviceTokenRequestDtoToBo(deviceTokenRequestDto);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

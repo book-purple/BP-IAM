@@ -1,23 +1,17 @@
 package com.bookpurple.iam.bo;
 
 import com.bookpurple.iam.model.AbstractErrorModel;
+import com.bookpurple.iam.model.AbstractSignUpResponseModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignUpResponseBo {
+public class SignUpResponseBo extends AbstractSignUpResponseModel {
 
-    @JsonProperty("authToken")
-    private String authToken;
-
-    @JsonProperty("error")
-    private AbstractErrorModel abstractErrorModel;
+    @Builder
+    public SignUpResponseBo(String authToken, String userUid, AbstractErrorModel abstractErrorModel) {
+        super(authToken, userUid, abstractErrorModel);
+    }
 }

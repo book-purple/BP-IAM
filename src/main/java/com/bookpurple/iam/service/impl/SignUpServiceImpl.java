@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 /*
@@ -43,6 +44,9 @@ public class SignUpServiceImpl implements ISignupService {
 
     @Autowired
     private ISignUpProcessor signUpProcessor;
+
+    @Autowired
+    private IUserDeviceTokenService deviceTokenService;
 
     @Override
     public void generateOtp(AuthRequestBo authRequestBo) {
@@ -124,5 +128,20 @@ public class SignUpServiceImpl implements ISignupService {
         return signUpResponseBo;
     }
 
-
+    @Override
+    public void handleDeviceTokenRegistration(DeviceTokenRequestBo deviceTokenRequestBo) {
+        UserBo userBo = userService.findUser(deviceTokenRequestBo.getUseruUid());
+        if (Optional.ofNullable(userBo).isPresent()) {
+            UserDeviceTokenBo deviceTokenBo = deviceTokenService.findUserDeviceToken(deviceTokenRequestBo.getUseruUid(),
+                    deviceTokenRequestBo.getDeviceToken());
+            if (Optional.ofNullable(deviceTokenBo).isPresent()) {
+                deviceTokenBo.setDeviceToken(deviceTokenRequestBo.getDeviceToken());
+                deviceTokenService.updateUserDeviceToken(deviceTokenBo);
+            } else {
+                deviceTokenService.createUserDeviceToken(userBo, deviceTokenRequestBo.getDeviceToken());
+            }
+        } else {
+            // user does not exist
+        }
+    }
 }

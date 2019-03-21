@@ -11,13 +11,13 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /*
- * Created by gauravsharma on 2019-03-10.
+ * Created by Gaurav Sharma on 21 Mar 2019
  */
 @MappedSuperclass
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class AbstractUserAccessCodeModel {
+public abstract class AbstractUserDeviceTokenModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +44,8 @@ public abstract class AbstractUserAccessCodeModel {
     @NotNull
     @NotBlank
     @NotEmpty
-    @Column(name = "auth_token")
-    private String authToken;
+    @Column(name = "device_token")
+    private String deviceToken;
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -53,9 +53,6 @@ public abstract class AbstractUserAccessCodeModel {
     @Column(name = "modified_at")
     private Date modifiedAt;
 
-    @Column(name = "expired_at")
-    private Date expiredAt;
-
-    @Column(name = "status")
-    private int status;
+    @Column(name = "install_status")
+    private int installStatus;
 }

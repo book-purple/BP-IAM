@@ -42,6 +42,7 @@ public class UserAccessCodeServiceImpl implements IUserAccessCodeService {
                 .status(Constants.AuthConstants.AUTH_TOKEN_ACTIVE)
                 .createdAt(CommonUtils.getDate())
                 .modifiedAt(CommonUtils.getDate())
+                .expiredAt(CommonUtils.getDateWithAddedMinutes(Constants.AuthConstants.AUTH_TOKEN_ACTIVE_TIME))
                 .build();
         UserAccessCodeEntity userAccessCodeEntity = requestMapper.userAccessCodeBoToEntity(userAccessCodeBo);
         return requestMapper.userAccessCodeEntityToBo(masterRepo.save(userAccessCodeEntity));

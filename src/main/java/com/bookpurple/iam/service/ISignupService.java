@@ -1,6 +1,7 @@
 package com.bookpurple.iam.service;
 
 import com.bookpurple.iam.bo.AuthRequestBo;
+import com.bookpurple.iam.bo.DeviceTokenRequestBo;
 import com.bookpurple.iam.bo.SignUpRequestBo;
 import com.bookpurple.iam.bo.SignUpResponseBo;
 
@@ -12,4 +13,6 @@ public interface ISignupService {
     public void generateOtp(AuthRequestBo authRequestBo);
 
     SignUpResponseBo doUserSignUp(AuthRequestBo authRequestBo, SignUpRequestBo signUpRequestBo);
+
+    void handleDeviceTokenRegistration(DeviceTokenRequestBo deviceTokenRequestBo);
 }
