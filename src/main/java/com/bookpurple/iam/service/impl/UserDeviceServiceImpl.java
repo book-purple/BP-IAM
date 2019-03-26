@@ -3,11 +3,13 @@ package com.bookpurple.iam.service.impl;
 import com.bookpurple.iam.bo.SignUpRequestBo;
 import com.bookpurple.iam.bo.UserBo;
 import com.bookpurple.iam.bo.UserDeviceBo;
+import com.bookpurple.iam.constant.Constants;
 import com.bookpurple.iam.converter.IRequestMapper;
 import com.bookpurple.iam.entity.UserDeviceEntity;
 import com.bookpurple.iam.repo.master.UserDeviceMasterRepo;
 import com.bookpurple.iam.repo.slave.UserDeviceSlaveRepo;
 import com.bookpurple.iam.service.IUserDeviceService;
+import com.bookpurple.iam.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,9 @@ public class UserDeviceServiceImpl implements IUserDeviceService {
                 .deviceType(signUpRequestBo.getDeviceType())
                 .appVersion(signUpRequestBo.getAppVersion())
                 .appVersionCode(signUpRequestBo.getAppVersionCode())
+                .createdAt(CommonUtils.getDate())
+                .modifiedAt(CommonUtils.getDate())
+                .status(Constants.AuthConstants.STATUS_ACTIVE)
                 .build();
 
         UserDeviceEntity userDeviceEntity = requestMapper.userDeviceBoToEntity(userDeviceBo);

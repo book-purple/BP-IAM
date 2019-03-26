@@ -42,12 +42,12 @@ public class UserServiceImpl implements IUserService {
                 .modifiedAt(CommonUtils.getDate())
                 .status(Constants.AuthConstants.TEMP_AUTH_ACTIVE)
                 .build();
-        saveUser(userBo);
-        return userBo;
+        return saveUser(userBo);
     }
 
-    private void saveUser(UserBo userBo) {
-        userMasterRepo.save(requestMapper.userBoToEntity(userBo));
+    private UserBo saveUser(UserBo userBo) {
+        return requestMapper.userEntityToBo(
+                userMasterRepo.save(requestMapper.userBoToEntity(userBo)));
     }
 
     @Override

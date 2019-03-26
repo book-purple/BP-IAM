@@ -37,6 +37,7 @@ public class UserAccessCodeServiceImpl implements IUserAccessCodeService {
     public UserAccessCodeBo createUserAccessCode(UserDeviceBo userDeviceBo, String authToken) {
         UserAccessCodeBo userAccessCodeBo = UserAccessCodeBo.builder()
                 .userId(userDeviceBo.getUserId())
+                .deviceId(userDeviceBo.getDeviceId())
                 .userUId(userDeviceBo.getUserUId())
                 .authToken(authToken)
                 .status(Constants.AuthConstants.AUTH_TOKEN_ACTIVE)

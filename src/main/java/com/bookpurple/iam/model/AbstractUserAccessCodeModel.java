@@ -30,8 +30,6 @@ public abstract class AbstractUserAccessCodeModel {
     private String deviceId;
 
     @NotNull
-    @NotBlank
-    @NotEmpty
     @Column(name = "user_id")
     private Long userId;
 
