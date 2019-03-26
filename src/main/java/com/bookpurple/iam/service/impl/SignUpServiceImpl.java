@@ -54,7 +54,9 @@ public class SignUpServiceImpl implements ISignupService {
         invalidateUserAuthToken(authRequestBo);
         deleteTempAuth(authRequestBo);
         String otp = getOtp();
+        authRequestBo.setOtp(otp);
         // send this otp to UCF layer
+        tempAuthService.createTempAuth(authRequestBo);
     }
 
     private void invalidateUserAuthToken(AuthRequestBo authRequestBo) {

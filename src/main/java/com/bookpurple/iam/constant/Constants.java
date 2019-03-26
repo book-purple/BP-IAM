@@ -33,4 +33,12 @@ public class Constants {
         public static final String INCORRECT_OTP_ERROR = "Incorrect OTP";
         public static final String INCORRECT_OTP_ERROR_MSG = "OTP entered is incorrect. Please try again!";
     }
+
+    public static class RequestHeaders {
+        public static final String APP_VERSION = "app_version";
+        public static final String APP_VERSION_CODE = "app_version_code";
+        public static final String device_type = "device_type";
+        public static final String device_name = "device_name";
+        public static final String os_version = "os_version";
+    }
 }

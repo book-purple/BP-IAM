@@ -2,6 +2,7 @@ package com.bookpurple.iam.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.persistence.MappedSuperclass;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
  * Created by gauravsharma on 2019-03-10.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @MappedSuperclass
 @Data
 @NoArgsConstructor
