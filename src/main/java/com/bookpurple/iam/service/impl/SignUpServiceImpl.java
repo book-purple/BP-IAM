@@ -8,11 +8,11 @@ import com.bookpurple.iam.model.AbstractErrorModel;
 import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
 import com.bookpurple.iam.repo.slave.TempAuthSlaveRepo;
 import com.bookpurple.iam.service.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 /*
@@ -20,6 +20,8 @@ import java.util.Optional;
  */
 @Service
 public class SignUpServiceImpl implements ISignupService {
+
+    private static Logger logger = Logger.getLogger(SignUpServiceImpl.class);
 
     @Autowired
     private Environment environment;
@@ -51,6 +53,7 @@ public class SignUpServiceImpl implements ISignupService {
     @Override
     public void generateOtp(AuthRequestBo authRequestBo) {
         // todo handling for block user
+        logger.info("inside generate OTP class");
         invalidateUserAuthToken(authRequestBo);
         deleteTempAuth(authRequestBo);
         String otp = getOtp();
