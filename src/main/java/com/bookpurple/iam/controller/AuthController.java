@@ -50,6 +50,7 @@ public class AuthController {
     @PostMapping(value = "/device", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity saveUserDeviceToken(DeviceTokenRequestDto deviceTokenRequestDto) {
         DeviceTokenRequestBo deviceTokenRequestBo = requestMapper.deviceTokenRequestDtoToBo(deviceTokenRequestDto);
+        signupService.handleDeviceTokenRegistration(deviceTokenRequestBo);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

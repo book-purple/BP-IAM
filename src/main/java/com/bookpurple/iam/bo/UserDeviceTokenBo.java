@@ -1,10 +1,7 @@
 package com.bookpurple.iam.bo;
 
 import com.bookpurple.iam.model.AbstractUserDeviceTokenModel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -14,9 +11,9 @@ import java.util.Date;
 /*
  * Created by Gaurav Sharma on 21 Mar 2019
  */
-@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class UserDeviceTokenBo extends AbstractUserDeviceTokenModel {
 
     @Builder

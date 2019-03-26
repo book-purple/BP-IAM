@@ -68,7 +68,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserBo findUser(String userUid) {
         return requestMapper.userEntityToBo(
-                userSlaveRepo.findByUserUid(userUid).orElse(null)
+                userSlaveRepo.findByUserUId(userUid).orElse(null)
         );
     }
 

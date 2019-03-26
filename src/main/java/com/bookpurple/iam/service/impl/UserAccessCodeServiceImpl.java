@@ -51,7 +51,7 @@ public class UserAccessCodeServiceImpl implements IUserAccessCodeService {
     @Override
     public UserAccessCodeBo findUserAccessCode(String userUid, String deviceId, int status) {
         UserAccessCodeEntity userAccessCodeEntity = userAccessCodeSlaveRepo
-                .findByUserUidAndDeviceIdAndStatus(userUid, deviceId, status)
+                .findByUserUIdAndDeviceIdAndStatus(userUid, deviceId, status)
                 .orElse(null);
         return requestMapper.userAccessCodeEntityToBo(userAccessCodeEntity);
     }

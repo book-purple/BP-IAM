@@ -1,12 +1,11 @@
 package com.bookpurple.iam.bo;
 
 import com.bookpurple.iam.model.AbstractSignUpRequest;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class SignUpRequestBo extends AbstractSignUpRequest {
 
     @Builder

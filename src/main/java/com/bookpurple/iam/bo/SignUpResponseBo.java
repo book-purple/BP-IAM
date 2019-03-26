@@ -2,12 +2,11 @@ package com.bookpurple.iam.bo;
 
 import com.bookpurple.iam.model.AbstractErrorModel;
 import com.bookpurple.iam.model.AbstractSignUpResponseModel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@Data
 public class SignUpResponseBo extends AbstractSignUpResponseModel {
 
     @Builder

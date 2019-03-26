@@ -141,7 +141,7 @@ public class SignUpServiceImpl implements ISignupService {
                 deviceTokenService.createUserDeviceToken(userBo, deviceTokenRequestBo.getDeviceToken());
             }
         } else {
-            // user does not exist
+            // user does not exist... save device token in separate DB for product purposes
         }
     }
 }

@@ -6,7 +6,7 @@ import com.bookpurple.iam.constant.Constants;
 import com.bookpurple.iam.converter.IRequestMapper;
 import com.bookpurple.iam.entity.UserDeviceTokenEntity;
 import com.bookpurple.iam.repo.master.UserDeviceTokenMasterRepo;
-import com.bookpurple.iam.repo.master.UserDeviceTokenSlaveRepo;
+import com.bookpurple.iam.repo.slave.UserDeviceTokenSlaveRepo;
 import com.bookpurple.iam.service.IUserDeviceTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +51,7 @@ public class UserDeviceTokenServiceImpl implements IUserDeviceTokenService {
 
     @Override
     public UserDeviceTokenBo findUserDeviceToken(String userUid, String deviceId) {
-        UserDeviceTokenEntity userDeviceTokenEntity = slaveRepo.findUserDeviceTokenByUserUidAndUserDeviceId(userUid,
+        UserDeviceTokenEntity userDeviceTokenEntity = slaveRepo.findUserDeviceTokenByUserUIdAndDeviceId(userUid,
                 deviceId).orElse(null);
         return requestMapper.userDeviceTokenEntityToBo(userDeviceTokenEntity);
     }

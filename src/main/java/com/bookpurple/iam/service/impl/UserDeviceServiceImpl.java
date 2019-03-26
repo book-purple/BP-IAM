@@ -29,7 +29,7 @@ public class UserDeviceServiceImpl implements IUserDeviceService {
     @Override
     public UserDeviceBo findUserDevice(String userUid, String deviceId) {
         UserDeviceEntity userDeviceEntity = userDeviceSlaveRepo
-                .findByUserUidAndDeviceIdAndStatus(userUid, deviceId, 1)
+                .findByUserUIdAndDeviceIdAndStatus(userUid, deviceId, 1)
                 .orElse(null);
         return requestMapper.userDeviceEntityToBo(userDeviceEntity);
     }

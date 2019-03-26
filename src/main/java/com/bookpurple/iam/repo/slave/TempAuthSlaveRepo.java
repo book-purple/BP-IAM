@@ -1,7 +1,6 @@
 package com.bookpurple.iam.repo.slave;
 
 import com.bookpurple.iam.entity.TempAuthEntity;
-import com.bookpurple.iam.interfaces.SlaveRepo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +9,7 @@ import java.util.Optional;
 /*
  * Created by gauravsharma on 2019-03-10.
  */
-@SlaveRepo
+@Repository
 public interface TempAuthSlaveRepo extends JpaRepository<TempAuthEntity, Long> {
 
     Optional<TempAuthEntity> findByMobileAndDeviceIdAndCountryCodeAndStatus(String mobile,
