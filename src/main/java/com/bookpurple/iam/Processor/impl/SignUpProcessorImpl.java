@@ -8,6 +8,7 @@ import com.bookpurple.iam.service.ITempAuthService;
 import com.bookpurple.iam.service.IUserAccessCodeService;
 import com.bookpurple.iam.service.IUserDeviceService;
 import com.bookpurple.iam.service.IUserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @Processor
 public class SignUpProcessorImpl implements ISignUpProcessor {
 
+    private static Logger logger = Logger.getLogger(SignUpProcessorImpl.class);
     @Autowired
     private IUserService userService;
 
@@ -30,6 +32,7 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
     @Override
     public SignUpResponseBo initiateSignUpProcessor(AuthRequestBo authRequestBo, SignUpRequestBo signUpRequestBo) {
         // check for user
+        logger.info("Initiating SignUp Processor...");
         UserBo userBo = userService.findUser(authRequestBo, Constants.AuthConstants.STATUS_ACTIVE);
         if (null == userBo) {
             // user does not exist... start sign up process

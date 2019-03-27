@@ -10,6 +10,12 @@ public class Constants {
         public static final String AUTHORIZATION = "Authorization";
     }
 
+    public static class UriConstants {
+        public static final String OTP_GENERATE = "/otp/generate";
+        public static final String SIGNUP = "/signup";
+        public static final String DEVICE_REGISTRATION = "/device";
+    }
+
     public static class AuthConstants {
         public static final int OTP_EXPIRY_OFFSET = 2;
         public static final int OTP_LENGTH = 6;

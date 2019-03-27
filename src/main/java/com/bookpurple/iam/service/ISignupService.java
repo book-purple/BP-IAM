@@ -10,7 +10,7 @@ import com.bookpurple.iam.bo.SignUpResponseBo;
  */
 public interface ISignupService {
 
-    public void generateOtp(AuthRequestBo authRequestBo);
+    void generateOtp(AuthRequestBo authRequestBo);
 
     SignUpResponseBo doUserSignUp(AuthRequestBo authRequestBo, SignUpRequestBo signUpRequestBo);
 

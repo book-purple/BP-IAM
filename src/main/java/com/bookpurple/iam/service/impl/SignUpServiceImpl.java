@@ -58,7 +58,8 @@ public class SignUpServiceImpl implements ISignupService {
         deleteTempAuth(authRequestBo);
         String otp = getOtp();
         authRequestBo.setOtp(otp);
-        // send this otp to UCF layer
+        // call UCF service Proxy
+        logger.info("Sending OTP to UCF Service Proxy...");
         tempAuthService.createTempAuth(authRequestBo);
     }
 
@@ -77,13 +78,13 @@ public class SignUpServiceImpl implements ISignupService {
                 if (null != userAccessCodeBo) {
                     userAccessCodeService.invalidateUserAuthToken(userAccessCodeBo);
                 } else {
-                    // todo add log here
+                    logger.info("user access code does not exist for user: " + userBo.getId());
                 }
             } else {
-                // todo add log here
+                logger.info("user device does not exist for user: " + userBo.getId());
             }
         } else {
-            // todo: add log here
+            logger.info("user does not exist for mobile no. : " + authRequestBo.getMobile());
         }
     }
 
@@ -108,7 +109,7 @@ public class SignUpServiceImpl implements ISignupService {
 
         TempAuthBo tempAuthBo = tempAuthService.findTempAuth(authRequestBo, Constants.AuthConstants.AUTH_TOKEN_ACTIVE);
         if (null == tempAuthBo) {
-            // sign up API got hit with /opt API
+            logger.info("SignUp API got hit without /otp API... Maybe a fraud call");
             return null;
         }
         if (otp.equalsIgnoreCase(tempAuthBo.getOtp())) {
@@ -146,7 +147,8 @@ public class SignUpServiceImpl implements ISignupService {
                 deviceTokenService.createUserDeviceToken(userBo, deviceTokenRequestBo.getDeviceToken());
             }
         } else {
-            // user does not exist... save device token in separate DB for product purposes
+            logger.info("User does not exist... saving device token for promotion purposes");
+            // todo: add device token registration service here
         }
     }
 }

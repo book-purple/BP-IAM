@@ -10,6 +10,7 @@ import com.bookpurple.iam.dto.DeviceTokenRequestDto;
 import com.bookpurple.iam.dto.SignUpRequestDto;
 import com.bookpurple.iam.dto.SignUpResponseDto;
 import com.bookpurple.iam.service.ISignupService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.jvm.hotspot.utilities.ConstantTag;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,22 +28,31 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/iam/v1")
 public class AuthController {
 
+    private static Logger logger = Logger.getLogger(AuthController.class);
+
     @Autowired
     private ISignupService signupService;
 
     @Autowired
     private IRequestMapper requestMapper;
 
-    @PostMapping(value = "/otp/generate", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
+    @PostMapping(value = Constants.UriConstants.OTP_GENERATE,
+            consumes = {APPLICATION_JSON_VALUE},
+            produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity generateOtp(@RequestBody AuthRequestDto authRequestDto) {
+        logger.info(Constants.UriConstants.OTP_GENERATE + " API called for deviceId:" + authRequestDto.getDeviceId());
         AuthRequestBo authRequestBo = requestMapper.authRequestDtoToBo(authRequestDto);
         signupService.generateOtp(authRequestBo);
 
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping(value = "/signup", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
-    public ResponseEntity<SignUpResponseDto> signUpUser(@RequestBody AuthRequestDto authRequestDto, HttpServletRequest servletRequest) {
+    @PostMapping(value = Constants.UriConstants.SIGNUP,
+            consumes = {APPLICATION_JSON_VALUE},
+            produces = {APPLICATION_JSON_VALUE})
+    public ResponseEntity<SignUpResponseDto> signUpUser(@RequestBody AuthRequestDto authRequestDto,
+                                                        HttpServletRequest servletRequest) {
+        logger.info(Constants.UriConstants.SIGNUP + " API called for deviceId:" + authRequestDto.getDeviceId());
         AuthRequestBo authRequestBo = requestMapper.authRequestDtoToBo(authRequestDto);
         SignUpRequestDto signUpRequestDto = buildSignUpRequestDto(servletRequest);
         SignUpRequestBo signUpRequestBo = requestMapper.signUpRequestDtoToBo(signUpRequestDto);
@@ -61,8 +72,11 @@ public class AuthController {
                 .build();
     }
 
-    @PostMapping(value = "/device", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
+    @PostMapping(value = Constants.UriConstants.DEVICE_REGISTRATION,
+            consumes = {APPLICATION_JSON_VALUE},
+            produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity saveUserDeviceToken(@RequestBody DeviceTokenRequestDto deviceTokenRequestDto) {
+        logger.info(Constants.UriConstants.DEVICE_REGISTRATION + " API called");
         DeviceTokenRequestBo deviceTokenRequestBo = requestMapper.deviceTokenRequestDtoToBo(deviceTokenRequestDto);
         signupService.handleDeviceTokenRegistration(deviceTokenRequestBo);
         return new ResponseEntity(HttpStatus.OK);
