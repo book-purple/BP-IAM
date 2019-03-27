@@ -25,10 +25,11 @@ public class TempAuthBo extends AbstractTempAuthModel {
                       @NotNull @NotBlank @NotEmpty String deviceId,
                       @NotNull @NotBlank @NotEmpty String countryCode,
                       String otp,
+                      Integer counter,
                       Date expiredAt,
                       Date createdAt,
                       Date modifiedAt,
                       int status) {
-        super(id, mobile, deviceId, countryCode, otp, expiredAt, createdAt, modifiedAt, status);
+        super(id, mobile, deviceId, countryCode, otp, counter, expiredAt, createdAt, modifiedAt, status);
     }
 }

@@ -45,6 +45,9 @@ public abstract class AbstractTempAuthModel implements Serializable {
     @Column(name = "otp")
     private String otp;
 
+    @Column(name = "counter")
+    private Integer counter;
+
     @Column(name = "expired_at")
     private Date expiredAt;
 

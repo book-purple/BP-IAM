@@ -9,6 +9,7 @@ import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
 import com.bookpurple.iam.repo.slave.TempAuthSlaveRepo;
 import com.bookpurple.iam.service.*;
 import org.apache.log4j.Logger;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -112,24 +113,19 @@ public class SignUpServiceImpl implements ISignupService {
             logger.info("SignUp API got hit without /otp API... Maybe a fraud call");
             return null;
         }
-        if (otp.equalsIgnoreCase(tempAuthBo.getOtp())) {
+        if (tempAuthBo.getCounter() < Constants.AuthConstants.OTP_RESEND_LIMIT &&
+                otp.equalsIgnoreCase(tempAuthBo.getOtp())) {
             // otp matched... start sign-up service
             signUpResponseBo = signUpProcessor.initiateSignUpProcessor(authRequestBo, signUpRequestBo);
+        } else if (tempAuthBo.getCounter() < 3) {
+            logger.info("OTP mismatch, incrementing OTP counter...");
+            tempAuthBo.setCounter(tempAuthBo.getCounter() + 1);
+            tempAuthService.updateTempAuth(tempAuthBo);
+            return buildSignUpErrorResponse(Constants.Errors.INCORRECT_OTP_ERROR_MSG);
         } else {
-            signUpResponseBo = SignUpResponseBo.builder()
-                    .abstractErrorModel(new AbstractErrorModel() {
+            logger.info("OTP mismatch, blocking user for retrying...");
+            return buildSignUpErrorResponse(Constants.Errors.INCORRECT_OTP_RETRY_REACHED_ERROR_MSG);
 
-                        @Override
-                        public void setError(String error) {
-                            super.setError(Constants.Errors.INCORRECT_OTP_ERROR);
-                        }
-
-                        @Override
-                        public void setErrorMessage(String errorMessage) {
-                            super.setErrorMessage(Constants.Errors.INCORRECT_OTP_ERROR_MSG);
-                        }
-                    })
-                    .build();
         }
         return signUpResponseBo;
     }
@@ -150,5 +146,22 @@ public class SignUpServiceImpl implements ISignupService {
             logger.info("User does not exist... saving device token for promotion purposes");
             // todo: add device token registration service here
         }
+    }
+
+    private SignUpResponseBo buildSignUpErrorResponse(String message) {
+        return SignUpResponseBo.builder()
+                .abstractErrorModel(new AbstractErrorModel() {
+
+                    @Override
+                    public void setError(String error) {
+                        super.setError(Constants.Errors.INCORRECT_OTP_ERROR);
+                    }
+
+                    @Override
+                    public void setErrorMessage(String errorMessage) {
+                        super.setErrorMessage(message);
+                    }
+                })
+                .build();
     }
 }

@@ -38,6 +38,7 @@ public class Constants {
     public static class Errors {
         public static final String INCORRECT_OTP_ERROR = "Incorrect OTP";
         public static final String INCORRECT_OTP_ERROR_MSG = "OTP entered is incorrect. Please try again!";
+        public static final String INCORRECT_OTP_RETRY_REACHED_ERROR_MSG = "OTP entered is incorrect. Please generate new OTP.";
     }
 
     public static class RequestHeaders {
