@@ -9,7 +9,6 @@ import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
 import com.bookpurple.iam.repo.slave.TempAuthSlaveRepo;
 import com.bookpurple.iam.service.*;
 import org.apache.log4j.Logger;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
