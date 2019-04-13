@@ -5,8 +5,11 @@ import com.bookpurple.iam.bo.TempAuthBo;
 import com.bookpurple.iam.constant.Constants;
 import com.bookpurple.iam.converter.IRequestMapper;
 import com.bookpurple.iam.entity.TempAuthEntity;
+import com.bookpurple.iam.entity.mongo.MTempAuthEntity;
 import com.bookpurple.iam.repo.master.TempAuthMasterRepo;
+import com.bookpurple.iam.repo.master.mongo.MTempAuthMasterRepo;
 import com.bookpurple.iam.repo.slave.TempAuthSlaveRepo;
+import com.bookpurple.iam.repo.slave.mongo.MTempAuthSlaveRepo;
 import com.bookpurple.iam.service.ITempAuthService;
 import com.bookpurple.iam.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +21,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class TempAuthServiceImpl implements ITempAuthService {
 
-    @Autowired
+    /*@Autowired
     private TempAuthMasterRepo tempAuthMasterRepo;
 
     @Autowired
-    private TempAuthSlaveRepo tempAuthSlaveRepo;
+    private TempAuthSlaveRepo tempAuthSlaveRepo;*/
 
     @Autowired
     private IRequestMapper iRequestMapper;
+
+    @Autowired
+    private MTempAuthMasterRepo mTempAuthMasterRepo;
+
+    @Autowired
+    private MTempAuthSlaveRepo mTempAuthSlaveRepo;
 
     @Override
     public TempAuthBo createTempAuth(AuthRequestBo authRequestBo) {
@@ -44,27 +53,35 @@ public class TempAuthServiceImpl implements ITempAuthService {
     }
 
     private void saveTempAuth(TempAuthBo tempAuthBo) {
-        tempAuthMasterRepo.save(iRequestMapper.tempAuthBoToEntity(tempAuthBo));
+        //tempAuthMasterRepo.save(iRequestMapper.tempAuthBoToEntity(tempAuthBo));
+        mTempAuthMasterRepo.save(iRequestMapper.mTempAuthBoToEntity(tempAuthBo));
     }
 
     @Override
     public TempAuthBo findTempAuth(AuthRequestBo authRequestBo, int status) {
-        TempAuthEntity tempAuthEntity = tempAuthSlaveRepo
+        /*TempAuthEntity tempAuthEntity = tempAuthSlaveRepo
+                .findByMobileAndDeviceIdAndCountryCodeAndStatus(authRequestBo.getMobile(),
+                        authRequestBo.getDeviceId(),
+                        authRequestBo.getCountryCode(),
+                        status)
+                .orElse(null);*/
+
+        MTempAuthEntity mTempAuthEntity = mTempAuthSlaveRepo
                 .findByMobileAndDeviceIdAndCountryCodeAndStatus(authRequestBo.getMobile(),
                         authRequestBo.getDeviceId(),
                         authRequestBo.getCountryCode(),
                         status)
                 .orElse(null);
-        return iRequestMapper.tempAuthEntityToBo(tempAuthEntity);
+        return iRequestMapper.mTempAuthEntityToBo(mTempAuthEntity);
     }
 
     @Override
     public void updateTempAuth(TempAuthBo tempAuthBo) {
-        tempAuthMasterRepo.save(iRequestMapper.tempAuthBoToEntity(tempAuthBo));
+        //tempAuthMasterRepo.save(iRequestMapper.tempAuthBoToEntity(tempAuthBo));
     }
 
     @Override
     public void deleteTempAuth(long id) {
-        tempAuthMasterRepo.deleteById(id);
+        //tempAuthMasterRepo.deleteById(id);
     }
 }

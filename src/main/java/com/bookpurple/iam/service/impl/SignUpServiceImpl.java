@@ -54,8 +54,8 @@ public class SignUpServiceImpl implements ISignupService {
     public void generateOtp(AuthRequestBo authRequestBo) {
         // todo handling for block user
         logger.info("inside generate OTP class");
-        invalidateUserAuthToken(authRequestBo);
-        deleteTempAuth(authRequestBo);
+        /*invalidateUserAuthToken(authRequestBo);
+        deleteTempAuth(authRequestBo);*/
         String otp = getOtp();
         authRequestBo.setOtp(otp);
         // call UCF service Proxy
@@ -89,8 +89,8 @@ public class SignUpServiceImpl implements ISignupService {
     }
 
     private void deleteTempAuth(AuthRequestBo authRequestBo) {
-        Optional.ofNullable(tempAuthService.findTempAuth(authRequestBo, Constants.AuthConstants.TEMP_AUTH_ACTIVE))
-                .ifPresent(tempAuthBo -> tempAuthService.deleteTempAuth(tempAuthBo.getId()));
+        /*Optional.ofNullable(tempAuthService.findTempAuth(authRequestBo, Constants.AuthConstants.TEMP_AUTH_ACTIVE))
+                .ifPresent(tempAuthBo -> tempAuthService.deleteTempAuth(tempAuthBo.getId()));*/
     }
 
     private String getOtp() {

@@ -6,6 +6,7 @@ import com.bookpurple.iam.dto.DeviceTokenRequestDto;
 import com.bookpurple.iam.dto.SignUpRequestDto;
 import com.bookpurple.iam.dto.SignUpResponseDto;
 import com.bookpurple.iam.entity.*;
+import com.bookpurple.iam.entity.mongo.MTempAuthEntity;
 import org.mapstruct.Mapper;
 
 /*
@@ -21,6 +22,10 @@ public interface IRequestMapper {
     TempAuthBo tempAuthEntityToBo(TempAuthEntity tempAuthEntity);
 
     TempAuthEntity tempAuthBoToEntity(TempAuthBo tempAuthBo);
+
+    TempAuthBo mTempAuthEntityToBo(MTempAuthEntity tempAuthEntity);
+
+    MTempAuthEntity mTempAuthBoToEntity(TempAuthBo tempAuthBo);
 
     SignUpRequestBo signUpRequestDtoToBo(SignUpRequestDto signUpRequestDto);
 
