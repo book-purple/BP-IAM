@@ -42,7 +42,13 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
         return doLoginProcess(userBo);
     }
 
-    // --- Sign up Process ---
+    /**
+     * Sign-up Processor
+     *
+     * @param authRequestBo {@link AuthRequestBo}
+     * @param signUpRequestBo {@link SignUpRequestBo}
+     * @return Sign-up Response {@link SignUpResponseBo}
+     */
     private SignUpResponseBo doSignUpProcess(AuthRequestBo authRequestBo, SignUpRequestBo signUpRequestBo) {
         // create a new user
         UserBo userBo = userService.createUser(authRequestBo);
@@ -64,8 +70,6 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
         }
         return initUserAuthProcess(userBo, userDeviceBo);
     }
-
-    // --- Login Process ---
 
     /**
      * Login Process

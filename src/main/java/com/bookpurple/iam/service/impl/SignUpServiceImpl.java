@@ -101,8 +101,8 @@ public class SignUpServiceImpl implements ISignupService {
 
     @Override
     public SignUpResponseBo doUserSignUp(AuthRequestBo authRequestBo, SignUpRequestBo signUpRequestBo) {
-        SignUpResponseBo signUpResponseBo = null;
         if (null == authRequestBo.getOtp()) {
+            logger.info("OTP is null, exiting...");
             return null;
         }
         String otp = authRequestBo.getOtp();
@@ -115,7 +115,7 @@ public class SignUpServiceImpl implements ISignupService {
         if (tempAuthBo.getCounter() < Constants.AuthConstants.OTP_RESEND_LIMIT &&
                 otp.equalsIgnoreCase(tempAuthBo.getOtp())) {
             // otp matched... start sign-up service
-            signUpResponseBo = signUpProcessor.initiateSignUpProcessor(authRequestBo, signUpRequestBo);
+            return signUpProcessor.initiateSignUpProcessor(authRequestBo, signUpRequestBo);
         } else if (tempAuthBo.getCounter() < 3) {
             logger.info("OTP mismatch, incrementing OTP counter...");
             tempAuthBo.setCounter(tempAuthBo.getCounter() + 1);
@@ -126,7 +126,6 @@ public class SignUpServiceImpl implements ISignupService {
             return buildSignUpErrorResponse(Constants.Errors.INCORRECT_OTP_RETRY_REACHED_ERROR_MSG);
 
         }
-        return signUpResponseBo;
     }
 
     @Override
@@ -149,6 +148,8 @@ public class SignUpServiceImpl implements ISignupService {
 
     private SignUpResponseBo buildSignUpErrorResponse(String message) {
         return SignUpResponseBo.builder()
+                .userUid(null)
+                .authToken(null)
                 .abstractErrorModel(new AbstractErrorModel() {
 
                     @Override
