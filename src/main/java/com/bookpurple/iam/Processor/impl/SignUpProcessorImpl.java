@@ -51,6 +51,7 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
                 userBo.getDeviceId());
         if (null != userDeviceBo) {
             // log here: This should never happen
+            logger.info("***** UserDeviceBo exit! This should never happen... *****");
             return null;
         }
         userDeviceBo = userDeviceService.createUserDevice(userBo, signUpRequestBo);
@@ -58,7 +59,7 @@ public class SignUpProcessorImpl implements ISignUpProcessor {
         UserAccessCodeBo userAccessCodeBo = userAccessCodeService.findUserAccessCode(userBo.getUserUId(),
                 userDeviceBo.getDeviceId(), Constants.AuthConstants.AUTH_TOKEN_ACTIVE);
         if (null != userAccessCodeBo) {
-            // this should never happen
+            logger.info("***** UserAccessCodeBo exit! This should never happen... *****");
             return null;
         }
         return initUserAuthProcess(userBo, userDeviceBo);

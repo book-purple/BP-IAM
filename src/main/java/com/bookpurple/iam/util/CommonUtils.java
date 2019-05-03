@@ -14,5 +14,6 @@ public class CommonUtils {
 
     public static Date getDateWithAddedMinutes(int minutes) {
         return Date.from(Instant.now().plusSeconds(minutes * 60));
+
     }
 }
