@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.bookpurple</groupId>
 	<artifactId>Book-Purple-Iam</artifactId>
-	<version>BPIAM-1.0.0</version>
+	<version>1.0.0-RELEASE</version>
 	<name>iam</name>
-	<description>Demo project for Spring Boot</description>
+	<description>User Identity and Access Management Service</description>
 
 	<properties>
 		<java.version>1.8</java.version>
